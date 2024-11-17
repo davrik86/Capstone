@@ -14,8 +14,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-
-import java.security.Key;
+import org.testng.asserts.SoftAssert;
 
 
 public class loginStepDef {
@@ -26,9 +25,10 @@ public class loginStepDef {
     itemsPage itemsPage= new itemsPage();
 
 
-    String name1= SeleniumUtils.funnyname();
+    String name1= SeleniumUtils.product();
     String price1= "17.99";
     String query="select * from CraterDBS.items order by created_at desc;";
+    String description= SeleniumUtils.randomLongtxt(120);
 
     @Given("I am an external user of the “Prime Tech Invoice Application”,")
     public void i_am_an_external_user_of_the_prime_tech_invoice_application() throws InterruptedException {
@@ -69,7 +69,7 @@ public class loginStepDef {
         Assert.assertTrue(itemsPage.itemsNewItemLbl.isDisplayed());
         itemsPage.itemsNameInput.sendKeys(name1);
         itemsPage.itemsPrice.sendKeys(price1);
-        itemsPage.itemsDescription.sendKeys(desc);
+        itemsPage.itemsDescription.sendKeys(description);
         Thread.sleep(1000);
         itemsPage.itemsUnit.sendKeys(unit + Keys.ENTER);
         itemsPage.itemsSaveBtn.click();
@@ -82,8 +82,14 @@ public class loginStepDef {
 
         Assert.assertTrue(driver.findElement(By.xpath("//td[.='"+name1+"']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(),'"+price1+"')]")).isDisplayed());
-        String actualValue= DBUtils.selectRecord(query, "name");
-        Assert.assertEquals(name1,actualValue);
-
+        String actualName= DBUtils.selectRecord(query, "name");
+        Assert.assertEquals(name1,actualName);
+//        SoftAssert softAssert= new SoftAssert();
+//        String actualPrice= DBUtils.selectRecord(query, "price");
+//        double actualPriceint= Double.parseDouble(actualPrice)/100;
+//        softAssert.assertEquals(price1,actualPriceint);
+        String actualDescription= DBUtils.selectRecord(query, "description");
+        Assert.assertEquals(description,actualDescription);
+//        softAssert.assertAll();
     }
 }
