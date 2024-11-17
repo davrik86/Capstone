@@ -1,5 +1,6 @@
 package Stepdefinitions;
 
+import Utilities.ConfigurationReader;
 import Utilities.DBUtils;
 import Utilities.SeleniumUtils;
 import io.cucumber.java.en.And;
@@ -27,8 +28,6 @@ public class CreateCustomerAPI {
     @Given("I am an authorized customer of the {string} REST API webservice,")
     public void i_am_an_authorized_customer_of_the_rest_api_webservice(String string) {
         String endpoint = "api/v1/auth/login";
-        String userEmail = "dummy@primetechschool.com";
-        String userPass = "primetech@school";
 
         Map<String,String> requestHeaders=new HashMap<>();
         requestHeaders.put("Content-Type", "application/json");
@@ -36,8 +35,8 @@ public class CreateCustomerAPI {
         requestHeaders.put("company", "1");
 
         Map<String, String> requestBody= new HashMap<>();
-        requestBody.put("username", userEmail);
-        requestBody.put("password", userPass);
+        requestBody.put("username", ConfigurationReader.getPropertyValue("userName"));
+        requestBody.put("password", ConfigurationReader.getPropertyValue("userPassword"));
         requestBody.put("device_name", "mobile_app");
 
 

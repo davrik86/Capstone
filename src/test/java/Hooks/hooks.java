@@ -9,7 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import java.time.Duration;
 
 public class hooks {
-    @Before
+    @Before("not @api")
     public void beforeScenario(){
         System.out.println("Running before each scenario");
         Driver.getDriver().manage().window().maximize();
@@ -17,7 +17,7 @@ public class hooks {
 
     }
 
-    @After()
+    @After("not @api")
     public void afterScenario(Scenario scenario){
         System.out.println("Running after each scenario");
 
