@@ -13,6 +13,18 @@ public class SeleniumUtils {
         return productName;
     }
 
+    public static String name() {
+        Faker faker = new Faker();
+        String name = faker.name().firstName();
+        return name;
+    }
+
+    public static String email() {
+        Faker faker = new Faker();
+        String email = faker.internet().emailAddress();
+        return email;
+    }
+
     public static String randomLongtxt(int lenght) {
         // Create a Random object
         Random random = new Random();
