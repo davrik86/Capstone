@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features" ,
-                glue ="Stepdefinitions" ,
+                glue ={"Stepdefinitions" ,"Hooks"},
                 plugin = {"pretty" , "html:target/primetech-report.html",
                           "json:target/primetech-report.json"  }  ,
                 dryRun = false

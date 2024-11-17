@@ -6,12 +6,13 @@ import org.junit.runner.RunWith;
 
 
     @RunWith(Cucumber.class)
-    @CucumberOptions(features = "src/test/resources/features" ,
-                    glue ="Stepdefinitions" ,
+    @CucumberOptions(features = "src/test/resources/features/" ,
+                    glue ={"Stepdefinitions",} ,
                     plugin = {"pretty" , "html:target/primetech-report.html",
                               "json:target/primetech-report.json"  }  ,
                     dryRun = true
                     )
+
     public class DryTestRunner{
 
     }
