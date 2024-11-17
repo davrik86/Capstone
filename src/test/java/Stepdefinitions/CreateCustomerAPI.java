@@ -8,8 +8,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 
@@ -84,7 +82,7 @@ public class CreateCustomerAPI {
     }
     @And("Respond Body should have id\\(randomly gen), name and email matching the POST request body")
     public void respond_body_should_have_id_randomly_gen_name_and_email_matching_the_post_request_body() {
-        response.prettyPrint();
+//        response.prettyPrint();
         response.then().body("data.name", Matchers.equalTo(name));
         response.then().body("data.email", Matchers.equalTo(email));
         String actualName= DBUtils.selectRecord(query, "name");
