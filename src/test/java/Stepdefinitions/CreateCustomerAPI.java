@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateCustomerAPI {
-    String baseURL="http://crater.primetech-apps.com/";
+    String baseURL=ConfigurationReader.getPropertyValue("craterURL");
     String token;
     Response response;
     String name= SeleniumUtils.name();
@@ -27,7 +27,7 @@ public class CreateCustomerAPI {
 
     @Given("I am an authorized customer of the {string} REST API webservice,")
     public void i_am_an_authorized_customer_of_the_rest_api_webservice(String string) {
-        String endpoint = "api/v1/auth/login";
+        String endpoint = "/api/v1/auth/login";
 
         Map<String,String> requestHeaders=new HashMap<>();
         requestHeaders.put("Content-Type", "application/json");
@@ -70,7 +70,7 @@ public class CreateCustomerAPI {
     }
     @Then("the {string}  REST API should have status code {int}")
     public void the_rest_api_should_have_status_code(String string, Integer code) {
-        String endpoint= "api/v1/customers";
+        String endpoint= "/api/v1/customers";
         response = RestAssured.given()
                 .headers(requestHeaders)
                 .body(requestBody)
