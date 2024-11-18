@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateCusomerAPItestNG {
-    String baseURI="http://crater.primetech-apps.com/";
+    String baseURI=ConfigurationReader.getPropertyValue("craterURL");
     String token;
     Response response;
     Map<String, String> requestHeaders= new HashMap<>();
@@ -22,7 +22,7 @@ public class CreateCusomerAPItestNG {
     public void login(){
 
 
-        String endpoint = "api/v1/auth/login";
+        String endpoint = "/api/v1/auth/login";
 
 
         requestHeaders.put("Content-Type", "application/json");
@@ -48,7 +48,7 @@ public class CreateCusomerAPItestNG {
     @Test(dependsOnMethods = "login")
     public void createCustomer(){
 
-        String endpoint="api/v1/customers";
+        String endpoint="/api/v1/customers";
 
         requestHeaders.put("Authorization", "Bearer "+token);
 
