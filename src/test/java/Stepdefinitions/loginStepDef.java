@@ -29,8 +29,8 @@ public class loginStepDef {
     String price1= "17.99";
     String query="select * from CraterDBS.items order by created_at desc;";
     String description= SeleniumUtils.randomLongtxt(120);
-
-    @Given("I am an external user of the “Prime Tech Invoice Application”,")
+    String unit="ct";
+    @Given("I am an external user of the Prime Tech Invoice Application,")
     public void i_am_an_external_user_of_the_prime_tech_invoice_application() throws InterruptedException {
 
         driver.get(ConfigurationReader.getPropertyValue("craterURL"));
@@ -56,15 +56,15 @@ public class loginStepDef {
         loginPage.itemTab.click();
         Thread.sleep(1000);
     }
-    @And("I click on “+ Add Item”,")
+    @When("I click on + Add Item,")
     public void i_click_on_add_item() throws InterruptedException {
         itemsPage.addItemBtn.click();
         Thread.sleep(1000);
 
 
     }
-    @Then("I enter the details for {string}, {string}, {string}, {string}.")
-    public void i_enter_the_details_for(String name, String unit, String price, String desc) throws InterruptedException {
+    @Then("I enter the details for name, pc, price, description.")
+    public void i_enter_the_details_for_name_pc_price_description() throws InterruptedException {
         Assert.assertEquals(BaseURL+"admin/items/create", driver.getCurrentUrl());
         Assert.assertTrue(itemsPage.itemsNewItemLbl.isDisplayed());
         itemsPage.itemsNameInput.sendKeys(name1);
