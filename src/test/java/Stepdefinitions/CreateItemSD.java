@@ -14,10 +14,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.testng.asserts.SoftAssert;
 
 
-public class loginStepDef {
+public class CreateItemSD {
 
     String BaseURL= "http://crater.primetech-apps.com/";
     WebDriver driver= Driver.getDriver();
@@ -64,7 +63,7 @@ public class loginStepDef {
 
     }
     @Then("I enter the details for name, pc, price, description.")
-    public void i_enter_the_details_for_name_pc_price_description() throws InterruptedException {
+    public void i_enter_the_details_for_pc_price_description()  throws InterruptedException {
         Assert.assertEquals(BaseURL+"admin/items/create", driver.getCurrentUrl());
         Assert.assertTrue(itemsPage.itemsNewItemLbl.isDisplayed());
         itemsPage.itemsNameInput.sendKeys(name1);
@@ -84,12 +83,9 @@ public class loginStepDef {
         Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(),'"+price1+"')]")).isDisplayed());
         String actualName= DBUtils.selectRecord(query, "name");
         Assert.assertEquals(name1,actualName);
-//        SoftAssert softAssert= new SoftAssert();
-//        String actualPrice= DBUtils.selectRecord(query, "price");
-//        double actualPriceint= Double.parseDouble(actualPrice)/100;
-//        softAssert.assertEquals(price1,actualPriceint);
+
         String actualDescription= DBUtils.selectRecord(query, "description");
         Assert.assertEquals(description,actualDescription);
-//        softAssert.assertAll();
+
     }
 }

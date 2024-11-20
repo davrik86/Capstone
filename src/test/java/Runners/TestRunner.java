@@ -10,7 +10,8 @@ import org.junit.runner.RunWith;
                 glue ={"Stepdefinitions" ,"Hooks"},
                 plugin = {"pretty" , "html:target/primetech-report.html",
                           "json:target/primetech-report.json"  } ,
-                dryRun = false
+                dryRun = false,
+                tags = "@regression"
                 )
 public class TestRunner {
 

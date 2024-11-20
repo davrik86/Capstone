@@ -23,10 +23,10 @@ public class CreateCustomerAPI {
     String email = SeleniumUtils.email();
     Map<String,String> requestHeaders=new HashMap<>();
     Map<String,String>  requestBody=new HashMap<>();
-    String query="select * from CraterDBS.customers order by created_at desc;";
+    String query="select *from CraterDBS.items order by created_at desc;";
 
-    @Given("I am an authorized customer of the {string} REST API webservice,")
-    public void i_am_an_authorized_customer_of_the_rest_api_webservice(String string) {
+    @Given("I am an authorized customer of the Create customer REST API webservice,")
+    public void i_am_an_authorized_customer_of_the_create_customer_rest_api_webservice() {
         String endpoint = "/api/v1/auth/login";
 
         Map<String,String> requestHeaders=new HashMap<>();
@@ -50,8 +50,8 @@ public class CreateCustomerAPI {
         System.out.println(token);
 
     }
-    @When("I send a request to the {string} with the ‘POST’ HTTP method,")
-    public void i_send_a_request_to_the_with_the_post_http_method(String endpoint) {
+    @When("I send a request to the customer webservice with the ‘POST’ HTTP method,")
+    public void i_send_a_request_to_the_customer_webservice_with_the_post_http_method() {
 
 
 //      Request Headers
@@ -68,8 +68,8 @@ public class CreateCustomerAPI {
 
 
     }
-    @Then("the {string}  REST API should have status code {int}")
-    public void the_rest_api_should_have_status_code(String string, Integer code) {
+    @Then("the create customer  REST API should have status code {int}")
+    public void the_create_customer_rest_api_should_have_status_code(Integer code) {
         String endpoint= "/api/v1/customers";
         response = RestAssured.given()
                 .headers(requestHeaders)
@@ -79,8 +79,8 @@ public class CreateCustomerAPI {
         response.then().statusCode(code);
 
     }
-    @And("Respond Body should have id\\(randomly gen), name and email matching the POST request body")
-    public void respond_body_should_have_id_randomly_gen_name_and_email_matching_the_post_request_body() {
+    @Then("Respond Body should have id\\(randomly gen), {string} and {string} matching the POST request body")
+    public void respond_body_should_have_id_randomly_gen_and_matching_the_post_request_body(String name, String email) {
 //        response.prettyPrint();
         response.then().body("data.name", Matchers.equalTo(name));
         response.then().body("data.email", Matchers.equalTo(email));
@@ -88,6 +88,8 @@ public class CreateCustomerAPI {
         Assert.assertEquals(name,actualName);
         String actualEmail= DBUtils.selectRecord(query, "email");
         Assert.assertEquals(email,actualEmail);
-
+//        String actualPrice= DBUtils.selectRecord(query, "price");
+//        double price= Double.parseDouble(actualPrice)/100;
+//        System.out.println(price);
     }
 }

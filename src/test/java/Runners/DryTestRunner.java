@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
                     plugin = {"pretty" , "html:target/primetech-report.html",
                               "json:target/primetech-report.json"  }  ,
                     dryRun = true
+
                     )
 
     public class DryTestRunner{
