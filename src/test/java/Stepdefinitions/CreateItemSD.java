@@ -37,7 +37,7 @@ public class CreateItemSD {
         driver.getCurrentUrl();
 
         Assert.assertEquals(BaseURL,actualURL);
-        Assert.assertTrue(loginPage.loginCopyright.isDisplayed());
+        Assert.assertTrue(loginPage.loginButton.isDisplayed());
 
         loginPage.loginEmail.sendKeys(ConfigurationReader.getPropertyValue("userName"));
         loginPage.loginPassword.sendKeys(ConfigurationReader.getPropertyValue("userPassword"));

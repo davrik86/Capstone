@@ -24,7 +24,7 @@ public class Driver {
                         break;
                     case "chrome-headless":
                         ChromeOptions chromeOptions= new ChromeOptions();
-                        chromeOptions.addArguments("--headless=old");
+                        chromeOptions.addArguments("--headless");
                         driver= new ChromeDriver(chromeOptions);
 
                     case "firefox":
@@ -33,7 +33,9 @@ public class Driver {
                     case "firefox-headless":
                         FirefoxOptions firefoxOptions =new FirefoxOptions();
                         firefoxOptions.addArguments("--headless");
+                        firefoxOptions.addArguments("--window-size=1920,1080");
                         driver= new FirefoxDriver(firefoxOptions);
+                        break;
 
                     case "edge":
                         driver= new EdgeDriver();
@@ -41,6 +43,9 @@ public class Driver {
 
                     case "safari":
                         driver= new EdgeDriver();
+                        break;
+                    default:
+                        driver = new ChromeDriver(); //Instantiate only once
                         break;
                 }
             }
