@@ -33,7 +33,6 @@ public class Driver {
                     case "firefox-headless":
                         FirefoxOptions firefoxOptions =new FirefoxOptions();
                         firefoxOptions.addArguments("--headless");
-                        firefoxOptions.addArguments("--window-size=1920,1080");
                         driver= new FirefoxDriver(firefoxOptions);
                         break;
 
