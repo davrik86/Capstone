@@ -73,11 +73,11 @@ public class CreateItemSD {
         itemsPage.itemsDescription.sendKeys(description);
         Thread.sleep(1000);
         itemsPage.itemsUnit.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         sendkeysWithActionsClass(itemsPage.itemsUnit,unit);
         itemsPage.itemsUnit.sendKeys(Keys.ENTER);
         long actualTime=SeleniumUtils.measureAlertTime(itemsPage.itemsSaveBtn, itemsPage.itemsMessageSuccess,5000);
-        System.out.println(actualTime);
+        System.out.println("time alert was visible in miliseoncd:"+ actualTime);
         Assert.assertTrue(actualTime>5);
 //        itemsPage.itemsSaveBtn.click();
         Thread.sleep(1000);

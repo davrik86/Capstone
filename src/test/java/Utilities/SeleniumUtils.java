@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class SeleniumUtils {
     Faker faker;
-  WebDriver driver = Driver.getDriver();
+  static WebDriver driver = Driver.getDriver();
     public static String product() {
         Faker faker = new Faker();
         String productName = faker.commerce().productName();
@@ -71,11 +71,11 @@ public class SeleniumUtils {
 
             // Wait for the alert message to become visible
             WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutSeconds));
-            wait.until(ExpectedConditions.visibilityOfElementLocated((By) alert));
+            wait.until(ExpectedConditions.visibilityOf(alert));
 
             // Record the end time
             long endTime = System.currentTimeMillis();
-            long time=endTime - startTime;
+            long time = endTime - startTime;
             // Return the time taken
             return time;
         } catch (TimeoutException e) {
