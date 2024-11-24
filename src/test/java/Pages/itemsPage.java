@@ -38,7 +38,10 @@ public class itemsPage {
     @FindBy(xpath = "//p[text()='Item created successfully']")
     public WebElement itemsMessage2;
 
-//    @FindBy(xpath = "")
+    @FindBy(xpath = " //ul[@class='flex flex-col p-0 m-0 list-none']")
+    public WebElement itemsDropdown;
+
+    //    @FindBy(xpath = "")
 //    public WebElement;
 
 }

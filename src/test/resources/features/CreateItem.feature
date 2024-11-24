@@ -6,3 +6,4 @@ Feature: Create Item Functionality for Invoice Application
   And I click on the ‘Items’ Menu Link,
   And I click on + Add Item,
   Then I enter the details for name, pc, price, description.
+  And I should be able to see Success message and validate entry in UI and DB

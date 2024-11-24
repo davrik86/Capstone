@@ -15,6 +15,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
+import static Utilities.SeleniumUtils.sendkeysWithActionsClass;
+
 
 public class CreateItemSD {
 
@@ -28,7 +30,7 @@ public class CreateItemSD {
     String price1= "17.99";
     String query="select * from CraterDBS.items order by created_at desc;";
     String description= SeleniumUtils.randomLongtxt(120);
-    String unit="ct";
+    String unit="pc";
     @Given("I am an external user of the Prime Tech Invoice Application,")
     public void i_am_an_external_user_of_the_prime_tech_invoice_application() throws InterruptedException {
 
@@ -70,9 +72,21 @@ public class CreateItemSD {
         itemsPage.itemsPrice.sendKeys(price1);
         itemsPage.itemsDescription.sendKeys(description);
         Thread.sleep(1000);
-        itemsPage.itemsUnit.sendKeys(unit + Keys.ENTER);
-        itemsPage.itemsSaveBtn.click();
+        itemsPage.itemsUnit.click();
+        Thread.sleep(2000);
+        sendkeysWithActionsClass(itemsPage.itemsUnit,unit);
+        itemsPage.itemsUnit.sendKeys(Keys.ENTER);
+        long actualTime=SeleniumUtils.measureAlertTime(itemsPage.itemsSaveBtn, itemsPage.itemsMessageSuccess,5000);
+        System.out.println(actualTime);
+        Assert.assertTrue(actualTime>5);
+//        itemsPage.itemsSaveBtn.click();
         Thread.sleep(1000);
+
+    }
+
+    @Then("I should be able to see Success message and validate entry in UI and DB")
+    public void i_should_be_able_to_see_success_message_and_validate_entry_in_ui_and_db() {
+
         Assert.assertEquals(BaseURL+"admin/items", driver.getCurrentUrl());
         Assert.assertTrue(itemsPage.itemsMessageSuccess.isDisplayed());
         Assert.assertEquals("Success!",itemsPage.itemsMessageSuccess.getText());
@@ -86,6 +100,7 @@ public class CreateItemSD {
 
         String actualDescription= DBUtils.selectRecord(query, "description");
         Assert.assertEquals(description,actualDescription);
+
 
     }
 }
