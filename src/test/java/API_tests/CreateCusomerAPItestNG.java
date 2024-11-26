@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.instanceOf;
+
 public class CreateCusomerAPItestNG {
     String baseURI=ConfigurationReader.getPropertyValue("craterURL");
     String token;
@@ -65,6 +67,8 @@ public class CreateCusomerAPItestNG {
         response.prettyPrint();
         response.path("data.name", String.valueOf(Matchers.equalTo(name)));
         response.path("data.email", String.valueOf(Matchers.equalTo(email)));
+        //the last one is the format to follow for future assertions
+        response.then().body("data.id", instanceOf(Integer.class));
 
 
 
