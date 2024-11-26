@@ -15,6 +15,29 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+/**
+ * Given I am an external user of the “Prime Tech Invoice Application”,
+ * And I have logged in to the application,
+ * And I click on the ‘Items’ Menu Link,
+ * And I click on “+ Add Item”,
+ * When I enter the details for the following sections:
+ * NAME.
+ * UNIT.
+ * PRICE.
+ * DESCRIPTION
+ * And I do not have any validation errors,
+ * And I click on the ‘Save Item’ button,
+ * Then:
+ * -I should see a flash message “Success!
+ * - The flash message should disappear within 5 seconds or less.
+ * - The user should be navigated to the Items Page.
+ * - The user should be able to view item added within the Items Table.
+ * - The item information entered for the following sections should be saved in the application database:
+ * NAME.
+ * UNIT.
+ * PRICE.
+ * DESCRIPTION
+ */
 
 import static Utilities.SeleniumUtils.sendkeysWithActionsClass;
 

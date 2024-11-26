@@ -12,7 +12,22 @@ import java.util.Map;
 
 import static org.hamcrest.Matchers.instanceOf;
 
+/**
+ * Given I am an authorized customer of the "Create customer" REST API webservice,
+ * When I send a request to the "Creater customer" with the ‘POST’ HTTP method,
+ * Then the "create customer"  REST API should:
+ * 1. If the request is successful then HTTP Status Code 200 code should be returned.
+ * 2. The Response Body should have the following elements:
+ *  - “id”: a randomly generated integer value from the server representing the newly created customer.
+ *  - “name”: the name of the customer that was provided in the request body.
+ *  - “email”: the email of the customer that was provided in the request body.
+ * 3. The customer should be created in the application database.
+ */
+
+
+
 public class CreateCusomerAPItestNG {
+
     String baseURI=ConfigurationReader.getPropertyValue("craterURL");
     String token;
     Response response;
@@ -67,7 +82,7 @@ public class CreateCusomerAPItestNG {
         response.prettyPrint();
         response.path("data.name", String.valueOf(Matchers.equalTo(name)));
         response.path("data.email", String.valueOf(Matchers.equalTo(email)));
-        //the last one is the format to follow for future assertions
+        // the format to follow for future assertions
         response.then().body("data.id", instanceOf(Integer.class));
 
 
