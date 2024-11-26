@@ -85,8 +85,6 @@ public class CreateCusomerAPItestNG {
         // the format to follow for future assertions
         response.then().body("data.id", instanceOf(Integer.class));
 
-
-
     }
 
 }

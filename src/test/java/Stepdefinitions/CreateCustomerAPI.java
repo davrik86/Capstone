@@ -14,6 +14,18 @@ import org.junit.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * Cucumber version
+ * Given I am an authorized customer of the "Create customer" REST API webservice,
+ * When I send a request to the "Creater customer" with the ‘POST’ HTTP method,
+ * Then the "create customer"  REST API should:
+ * 1. If the request is successful then HTTP Status Code 200 code should be returned.
+ * 2. The Response Body should have the following elements:
+ *  - “id”: a randomly generated integer value from the server representing the newly created customer.
+ *  - “name”: the name of the customer that was provided in the request body.
+ *  - “email”: the email of the customer that was provided in the request body.
+ * 3. The customer should be created in the application database.
+ */
 
 public class CreateCustomerAPI {
     String baseURL=ConfigurationReader.getPropertyValue("craterURL");
