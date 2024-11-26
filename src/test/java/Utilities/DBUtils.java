@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBUtils {
-//    static String dbUrl = ConfigurationReader.getPropertyValue("DBURL");
-//    static String userName = ConfigurationReader.getPropertyValue("DBuserName");
-//    static String password = ConfigurationReader.getPropertyValue("DBpasword");
+    static String dbUrl = ConfigurationReader.getPropertyValue("DBURL");
+    static String userName = ConfigurationReader.getPropertyValue("DBuserName");
+    static String password = ConfigurationReader.getPropertyValue("DBpasword");
 
-    static String dbUrl = "jdbc:mysql://stack-overflow.cfse9bqqndon.us-east-1.rds.amazonaws.com/CraterDBS";
-    static String userName = "craterdbuser";
-    static String password = "ptschool2023";
 
 
     public static Connection getConnection(){

@@ -10,6 +10,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.sl.In;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -27,7 +28,7 @@ public class CreateItemSD {
 
 
     String name1= SeleniumUtils.product();
-    String price1= "17.99";
+    String price1= "180.00";
     String description= SeleniumUtils.randomLongtxt(120);
     String unit="pc";
     String query="select * from CraterDBS.items order by created_at desc;";
@@ -106,6 +107,15 @@ public class CreateItemSD {
         Assert.assertEquals(description,actualDescription);
         String actualID= DBUtils.selectRecord(unitQuery,"Unit");
         Assert.assertEquals(unit,actualID);
+        String actualPrice= DBUtils.selectRecord(unitQuery,"price");
+        //converting String to double value
+        double doubleValue = Double.parseDouble(price1);
+        //converting double to String value
+        int intValue = (int) doubleValue;
+        //multiplying by 100 to match the DB value of price
+        int dbprice= intValue*100;
+        System.out.println(dbprice);
+        Assert.assertEquals(dbprice, Integer.parseInt(actualPrice));
 
 
     }
