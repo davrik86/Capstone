@@ -28,9 +28,14 @@ public class CreateItemSD {
 
     String name1= SeleniumUtils.product();
     String price1= "17.99";
-    String query="select * from CraterDBS.items order by created_at desc;";
     String description= SeleniumUtils.randomLongtxt(120);
     String unit="pc";
+    String query="select * from CraterDBS.items order by created_at desc;";
+    String unitQuery="SELECT i.name, description, price, u.name AS 'Unit' " +
+            "FROM items i " +
+            "INNER JOIN units u " +
+            "ON i.unit_id = u.id " +
+            "WHERE i.name=\""+name1+"\";";
     @Given("I am an external user of the Prime Tech Invoice Application,")
     public void i_am_an_external_user_of_the_prime_tech_invoice_application() throws InterruptedException {
 
@@ -79,27 +84,28 @@ public class CreateItemSD {
         long actualTime=SeleniumUtils.measureAlertTime(itemsPage.itemsSaveBtn, itemsPage.itemsMessageSuccess,5000);
         System.out.println("time alert was visible in miliseoncd:"+ actualTime);
         Assert.assertTrue(actualTime>5);
-//        itemsPage.itemsSaveBtn.click();
         Thread.sleep(1000);
 
     }
 
     @Then("I should be able to see Success message and validate entry in UI and DB")
     public void i_should_be_able_to_see_success_message_and_validate_entry_in_ui_and_db() {
-
+        //UI part
         Assert.assertEquals(BaseURL+"admin/items", driver.getCurrentUrl());
         Assert.assertTrue(itemsPage.itemsMessageSuccess.isDisplayed());
         Assert.assertEquals("Success!",itemsPage.itemsMessageSuccess.getText());
         Assert.assertTrue(itemsPage.itemsMessage2.isDisplayed());
         Assert.assertEquals("Item created successfully",itemsPage.itemsMessage2.getText());
-
         Assert.assertTrue(driver.findElement(By.xpath("//td[.='"+name1+"']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(),'"+price1+"')]")).isDisplayed());
+
+        //Back end part
         String actualName= DBUtils.selectRecord(query, "name");
         Assert.assertEquals(name1,actualName);
-
         String actualDescription= DBUtils.selectRecord(query, "description");
         Assert.assertEquals(description,actualDescription);
+        String actualID= DBUtils.selectRecord(unitQuery,"Unit");
+        Assert.assertEquals(unit,actualID);
 
 
     }

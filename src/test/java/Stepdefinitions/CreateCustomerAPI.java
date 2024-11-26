@@ -25,6 +25,7 @@ public class CreateCustomerAPI {
     Map<String,String>  requestBody=new HashMap<>();
     String query="select *from CraterDBS.customers order by created_at desc;";
 
+
     @Given("I am an authorized customer of the Create customer REST API webservice,")
     public void i_am_an_authorized_customer_of_the_create_customer_rest_api_webservice() {
         String endpoint = "/api/v1/auth/login";
@@ -66,7 +67,6 @@ public class CreateCustomerAPI {
 
 
 
-
     }
     @Then("the create customer  REST API should have status code {int}")
     public void the_create_customer_rest_api_should_have_status_code(Integer code) {
@@ -88,8 +88,6 @@ public class CreateCustomerAPI {
         Assert.assertEquals(name,actualName);
         String actualEmail= DBUtils.selectRecord(query, "email");
         Assert.assertEquals(email,actualEmail);
-//        String actualPrice= DBUtils.selectRecord(query, "price");
-//        double price= Double.parseDouble(actualPrice)/100;
-//        System.out.println(price);
+
     }
 }
