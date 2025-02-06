@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.*;
 
+import static io.restassured.RestAssured.given;
+
 public class TeamUpDriver {
 
     String baseURI = "https://api.teamup.com";
@@ -13,6 +15,7 @@ public class TeamUpDriver {
     String token;
     Response response;
     Map<String, String> requestHeader = new HashMap<>();
+    Map<String, String> params = new HashMap<>();
     String email = "diyorjon.rafikov@sultantrans.com";
     String password = "Friendofdiyor@19";
 
@@ -31,7 +34,7 @@ public class TeamUpDriver {
         requestBody.put("email", email);
         requestBody.put("password", password);
 
-        response = RestAssured.given()
+        response = given()
                 .headers(requestHeader)
                 .body(requestBody)
                 .when()
@@ -39,7 +42,7 @@ public class TeamUpDriver {
         response.then().statusCode(200);
 //        response.prettyPrint();
         token = response.path("auth_token");
-//        System.out.println(token);
+        System.out.println(token);
     }
 
     @Test(dependsOnMethods = "login")
@@ -51,9 +54,19 @@ public class TeamUpDriver {
         requestHeader.put("Teamup-Token", TeamupToken);
         requestHeader.put("Authorization", token);
 
+        params.put("startDate","2025-02-05");
+        params.put("endDate","2025-12-06");
+
         response = RestAssured.given()
                 .headers(requestHeader)
-                .get(baseURI + endpoint);
+                .queryParams(params)
+                .when()
+                .get(baseURI + endpoint)
+                .then()
+                .statusCode(200) // This ensures the server responded with a 200 OK
+                .extract()
+                .response();
+
 //        response.prettyPrint();
 //        String title = response.path("events[1].title");
 //        String who = response.path("events[1].who");
@@ -65,7 +78,7 @@ public class TeamUpDriver {
 
         // Get the list of events from the response
         List<Map<String, Object>> events = response.path("events");
-        // Count the number of events retrieved
+//        // Count the number of events retrieved
         int eventCount = events.size();
         System.out.println("Number of events retrieved: " + eventCount);
 
