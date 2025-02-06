@@ -139,7 +139,5 @@ public class CreateItemSD {
         int dbprice= intValue*100;
         System.out.println(dbprice);
         Assert.assertEquals(dbprice, Integer.parseInt(actualPrice));
-
-
     }
 }
